@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Руслан Трубчик — Ментор</title>
+    <meta name="description" content="Ментор для предпринимателей и творцов в точке перехода. Кризис. Деньги. Реализация.">
+    <meta property="og:title" content="Руслан Трубчик — Ментор">
+    <meta property="og:description" content="Помогаю тем, кто перерос текущую роль. Кризис. Деньги. Реализация.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trubchik.com">
+    <meta property="og:image" content="https://trubchik.com/og-image.jpg">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4EB9E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='15' r='4'/><path d='M10.5 12.5L17 6'/><path d='M15 8l2-2'/><path d='M17 6l2 2'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <style>
+        :root {
+            --accent: #D4EB9E;
+            --accent-soft: #2a3a1a;
+            --accent-deep: #b8d476;
+            --bg: #111110;
+            --bg-warm: #1c1c1a;
+            --text: #f0efe8;
+            --text-secondary: #8a8a7e;
+            --text-light: #4a4a44;
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'Inter', -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 17px;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--text);
+        }
+
+        /* ═══════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════ */
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .container--wide {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .divider {
+            width: 48px;
+            height: 1px;
+            background: var(--accent-deep);
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.6s ease 0.3s, width 0.6s ease 0.3s;
+        }
+
+        .divider.visible {
+            opacity: 1;
+            width: 48px;
+        }
+
+        /* ═══════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════ */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+
+        .hero-name {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.2s forwards;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 480px;
+            line-height: 1.9;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+        }
+
+        .hero-accent {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 2.5rem 0;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.8s forwards;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.2s forwards;
+        }
+
+        .hero-scroll span {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 32px;
+            background: linear-gradient(to bottom, var(--text-light), transparent);
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        /* ═══════════════════════════════════════
+           PILLARS
+           ═══════════════════════════════════════ */
+
+        .pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        .pillar {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .pillar::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .pillar:hover::before {
+            transform: scale(1.8);
+        }
+
+        .pillar-title {
+            font-family: var(--serif);
+            font-size: 1.85rem;
+            font-weight: 400;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.02em;
+        }
+
+        .pillar-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════════════════
+           SECTION TITLES
+           ═══════════════════════════════════════ */
+
+        .section-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(212,235,158,0.55);
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 400;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        /* ═══════════════════════════════════════
+           ABOUT
+           ═══════════════════════════════════════ */
+
+        .about-photo-wrap {
+            position: relative;
+            width: fit-content;
+            margin: 0 auto 3rem;
+            padding: 14px;
+            background-image:
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6)),
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6)),
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6)),
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6)),
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6)),
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6)),
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6)),
+                linear-gradient(rgba(212,235,158,0.6), rgba(212,235,158,0.6));
+            background-size:
+                1.5px 26px, 26px 1.5px,
+                1.5px 26px, 26px 1.5px,
+                1.5px 26px, 26px 1.5px,
+                1.5px 26px, 26px 1.5px;
+            background-position:
+                top left,    top left,
+                top right,   top right,
+                bottom left, bottom left,
+                bottom right, bottom right;
+            background-repeat: no-repeat;
+        }
+
+        .about-photo-wrap img {
+            width: 240px;
+            height: 298px;
+            object-fit: cover;
+            object-position: center 5%;
+            display: block;
+        }
+
+        .about-text {
+            font-size: 1.12rem;
+            line-height: 2;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .about-text a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(212,235,158,0.35);
+            padding-bottom: 1px;
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .about-text a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .about-item {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 2;
+        }
+
+        .about-item a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 1px;
+            transition: border-color 0.3s ease;
+        }
+
+        .about-item a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            padding: 0.45rem 1rem;
+            border: 1px solid #2a2a26;
+            border-radius: 100px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            border-color: var(--accent-deep);
+            background: var(--accent-soft);
+        }
+
+        /* ═══════════════════════════════════════
+           WHAT YOU GET
+           ═══════════════════════════════════════ */
+
+        .offerings {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .offering-title {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+
+        .offering-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════════════════
+           PRICING
+           ═══════════════════════════════════════ */
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: auto 1fr auto 1fr auto 1fr auto;
+            gap: 0;
+            align-items: stretch;
+        }
+
+        .price-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.6rem;
+            align-self: center;
+        }
+
+        .price-connector-line { display: none; }
+
+        .price-connector-arrow {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1;
+            opacity: 0.75;
+        }
+
+        .price-connector--entry .price-connector-arrow,
+        .price-connector--exit .price-connector-arrow {
+            display: none;
+        }
+
+        .price-card--locked {
+            background: none !important;
+            border: 1px solid rgba(212,235,158,0.2) !important;
+            box-shadow: none !important;
+            transition: opacity 0.5s ease;
+        }
+
+        .price-card--locked .price-desc,
+        .price-card--locked .price-locked-badge {
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
+        }
+
+        .price-card--locked .price-symbol {
+            display: block;
+            text-align: center;
+            color: var(--accent);
+            margin: 0.8rem 0;
+            animation: symbolPulse 3s ease-in-out infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        .price-card--locked:hover .price-desc,
+        .price-card--locked:hover .price-locked-badge {
+            opacity: 0.85;
+        }
+
+        .price-card--locked:hover .price-symbol {
+            opacity: 0.8;
+        }
+
+        .price-card--locked:hover {
+            border: 1px solid rgba(212,235,158,0.45) !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        @keyframes symbolPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .price-locked-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .price-step {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-deep);
+            margin-bottom: 0.8rem;
+        }
+
+        .price-card {
+            padding: 2.5rem 2rem;
+            background: #1c1c1a;
+            border-radius: 12px;
+            border: 1px solid #2a2a26;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .price-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.05);
+        }
+
+        .price-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .pricing-btn {
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--accent);
+            color: #1a1a1a;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            border: none;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .pricing-btn:hover {
+            background: var(--accent-deep);
+            transform: translateY(-1px);
+        }
+
+        .pricing-intro {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .price-name {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+
+        .price-duration {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .price-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-amount {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text);
+        }
+
+        .price-amount span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* ═══════════════════════════════════════
+           APPROACH
+           ═══════════════════════════════════════ */
+
+        .approach-block {
+            position: relative;
+            padding-top: 3rem;
+        }
+
+        .approach-block::before {
+            content: '"';
+            font-family: var(--serif);
+            font-size: 6rem;
+            color: var(--accent);
+            position: absolute;
+            top: 1rem;
+            left: -3.5rem;
+            line-height: 1;
+            opacity: 0.5;
+        }
+
+        .approach-text {
+            font-family: var(--serif);
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            line-height: 1.9;
+            font-weight: 400;
+            color: var(--text);
+        }
+
+        .approach-text em {
+            font-style: italic;
+            color: var(--text);
+        }
+
+        .approach-credo {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #2a2a26;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        /* ═══════════════════════════════════════
+           CTA / CALENDLY
+           ═══════════════════════════════════════ */
+
+        .cta-section {
+            text-align: center;
+        }
+
+        .cta-title {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .calendly-wrap {
+            max-width: 640px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #2a2a26;
+            background: #1c1c1a;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 0.9rem 2.4rem;
+            background: var(--accent);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent-deep);
+            transform: translateY(-1px);
+        }
+
+        .cta-or {
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .cta-or a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 1px;
+            transition: border-color 0.3s ease;
+        }
+
+        .cta-or a:hover {
+            border-color: var(--text);
+        }
+
+        .tg-btn {
+            -webkit-appearance: none;
+            appearance: none;
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--text-light);
+            color: var(--text);
+            padding: 0.8rem 2rem;
+            border-radius: 100px;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .tg-btn:hover {
+            border-color: var(--text);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            letter-spacing: 0.05em;
+        }
+
+        /* ═══════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════ */
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Staggered children */
+        .stagger > * {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stagger.visible > *:nth-child(1) { transition-delay: 0.1s; }
+        .stagger.visible > *:nth-child(2) { transition-delay: 0.2s; }
+        .stagger.visible > *:nth-child(3) { transition-delay: 0.3s; }
+        .stagger.visible > *:nth-child(4) { transition-delay: 0.4s; }
+        .stagger.visible > *:nth-child(5) { transition-delay: 0.5s; }
+
+        .stagger.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════════════════
+           VIDEO GRID
+           ═══════════════════════════════════════ */
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .video-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-wrap iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+
+        @media (max-width: 600px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding: 3rem 1.5rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .approach-block {
+                padding: 2.5rem 2rem;
+            }
+
+            .approach-block::before {
+                font-size: 4rem;
+                left: 0;
+            }
+
+            .price-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .price-connector {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HERO ═══ -->
+    <header class="hero">
+        <h1 class="hero-name">Руслан Трубчик</h1>
+        <div class="hero-accent"></div>
+        <p class="hero-tagline">Помогаю тем, кто перерос текущую роль</p>
+        <div class="hero-scroll">
+            <span>Узнать больше</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- ═══ PILLARS ═══ -->
+    <section>
+        <div class="container">
+            <p class="section-label">Зона интереса</p>
+            <div class="pillars stagger">
+                <div class="pillar">
+                    <h2 class="pillar-title">Кризис</h2>
+                    <p class="pillar-text">Превращаем разрушение в фундамент для нового этапа</p>
+                </div>
+                <div class="pillar">
+                    <h2 class="pillar-title">Деньги</h2>
+                    <p class="pillar-text">Убираем ментальные блоки и строим экономику на твоей истинной силе</p>
+                </div>
+                <div class="pillar">
+                    <h2 class="pillar-title">Реализация</h2>
+                    <p class="pillar-text">Находим форму для потенциала и переходим к действиям из ясности</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section>
+        <div class="container">
+            <div class="about-photo-wrap">
+                <img src="photo-ruslan-2.png" alt="Руслан Трубчик">
+            </div>
+            <p class="section-label">Обо мне</p>
+            <p class="about-text">12 лет на стыке бизнеса, творчества и психологии.</p>
+            <p class="about-text" style="margin-bottom:1.5rem;">Прошёл от найма до экзита и личной трансформации. Теперь помогаю другим сократить этот путь.</p>
+            <p class="about-item">Сооснователь <a href="https://poisondrop.ru" target="_blank">Poison Drop</a> (exit 2022, <a href="https://www.vedomosti.ru/business/articles/2022/10/13/945226-top-menedzher-stal-sovladeltsem-poison-drop" target="_blank">Ведомости</a>)</p>
+            <p class="about-item">Сооснователь <a href="https://doma.pt" target="_blank">DOMA Portugal</a> (<a href="https://www.forbes.ru/svoi-biznes/471223-kom-uniti-pohozih-ludej-kto-i-zacem-stroit-startap-derevni-po-vsemu-miru" target="_blank">Forbes</a>)</p>
+            <p class="about-item">Создаю <a href="https://spiralpark.com" target="_blank">Spiral Park</a> на Мадейре</p>
+            <p class="about-item">Музыкант (<a href="#" target="_blank">Spotify</a>)</p>
+            <p class="about-item">Образование — Психолог (МГЭИ, ХГЭУ)</p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ VIDEO ═══ -->
+    <section>
+        <div class="container--wide">
+            <p class="section-label">Мой канал «Хайкинг со смыслом»</p>
+            <div class="video-grid">
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/73FxhpaIzxo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/dbwMl_6-p7k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+            <p style="text-align:center;margin-top:1.5rem;font-size:0.85rem;color:var(--text-secondary);">
+                <a href="https://www.youtube.com/@hiking_with_meaning" target="_blank" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px;transition:border-color 0.3s ease;">Все видео на канале →</a>
+            </p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ WHAT YOU GET ═══ -->
+    <section>
+        <div class="container">
+            <p class="section-label">Что ты получаешь</p>
+            <div class="offerings stagger">
+                <div class="offering">
+                    <h3 class="offering-title">Ясность</h3>
+                    <p class="offering-text">Честный разговор, из которого ты выходишь с готовым планом шагов</p>
+                </div>
+                <div class="offering">
+                    <h3 class="offering-title">Система</h3>
+                    <p class="offering-text">Авторская диагностика: находим блоки в деньгах и убеждениях</p>
+                </div>
+                <div class="offering">
+                    <h3 class="offering-title">Ресурс</h3>
+                    <p class="offering-text">Доступ к глобальному сообществу предпринимателей для партнёрств и роста</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ PRICING ═══ -->
+    <section>
+        <div class="container--wide">
+            <div class="pricing-grid">
+                <div class="price-connector price-connector--entry" aria-hidden="true">
+                    <div class="price-connector-line"></div>
+                    <div class="price-connector-arrow">></div>
+                </div>
+                <div class="price-card">
+                    <p class="price-step">Шаг 1</p>
+                    <h3 class="price-name">Встреча</h3>
+                    <p class="price-duration">15 минут</p>
+                    <p class="price-desc">Познакомимся и поймём, подходит ли нам работать вместе</p>
+                    <button class="pricing-btn" style="margin-top:1.5rem;" onclick="Calendly.initPopupWidget({url:'https://calendly.com/rtrubchik/gathering?primary_color=d4eb9e'});return false;">Выбрать время</button>
+                </div>
+                <div class="price-connector" aria-hidden="true">
+                    <div class="price-connector-line"></div>
+                    <div class="price-connector-arrow">></div>
+                </div>
+                <div class="price-card">
+                    <p class="price-step">Шаг 2</p>
+                    <h3 class="price-name">Поиск видения</h3>
+                    <p class="price-duration">60 минут</p>
+                    <p class="price-desc">Глубокий разговор, который сдвигает точку сборки. Точные вопросы, честные инсайты</p>
+                    <p class="price-amount">390 <span>€</span></p>
+                    <p style="font-family:var(--sans);font-size:0.75rem;color:var(--text-secondary);letter-spacing:0.05em;margin-top:0.4rem;">Intro price для первых участников</p>
+                </div>
+                <div class="price-connector" aria-hidden="true">
+                    <div class="price-connector-line"></div>
+                    <div class="price-connector-arrow">></div>
+                </div>
+                <div class="price-card price-card--locked">
+                    <p class="price-step">Шаг 3</p>
+                    <h3 class="price-name">Путь создателя</h3>
+                    <span class="price-symbol">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><circle cx="8" cy="15" r="4"/><path d="M10.5 12.5L17 6"/><path d="M15 8l2-2"/><path d="M17 6l2 2"/></svg>
+                    </span>
+                    <p class="price-desc">Партнёрство, со-творчество, долгая работа — формат откроется после поиска видения</p>
+                </div>
+                <div class="price-connector price-connector--exit" aria-hidden="true">
+                    <div class="price-connector-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══ APPROACH ═══ -->
+    <section>
+        <div class="container">
+            <div class="approach-block">
+                <p class="approach-text"><span style="color:var(--accent);">Все ответы уже есть внутри нас.</span><br>Важно, чтобы своевременно появился тот, кто задаст правильный вопрос.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FINAL CTA ═══ -->
+    <section style="padding:4rem 0;text-align:center;">
+        <div class="container">
+            <button class="pricing-btn" onclick="Calendly.initPopupWidget({url:'https://calendly.com/rtrubchik/gathering?primary_color=d4eb9e'});return false;">Выбрать время</button>
+            <a href="https://t.me/trubchik" target="_blank" class="tg-btn" style="margin-top:1.2rem;">Написать в Telegram</a>
+        </div>
+    </section>
+
+    <!-- Scroll Animations -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('section, .divider, .stagger').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
