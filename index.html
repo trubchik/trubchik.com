@@ -337,6 +337,7 @@
         .hero__content > :nth-child(2) { animation-delay: 0.12s; }
         .hero__content > :nth-child(3) { animation-delay: 0.26s; }
         .hero__content > :nth-child(4) { animation-delay: 0.4s; }
+        .hero__content > :nth-child(5) { animation-delay: 0.52s; }
 
         .hero__name {
             display: flex;
@@ -382,6 +383,7 @@
             gap: 1rem 1.75rem;
         }
         .hero__more { font-size: 0.95rem; }
+        .hero__hint { margin-top: 1.1rem; font-size: 0.875rem; color: var(--text-3); }
 
         /* ═══ WHEN — the situations, set as one quiet list ═══ */
         .when__list { list-style: none; border-top: 1px solid var(--line); }
@@ -707,6 +709,30 @@
             padding-top: 2rem;
         }
         .fcard__hint { font-size: 0.875rem; color: var(--text-3); }
+        .fsteps {
+            display: grid;
+            gap: 0.65rem;
+            margin-top: 1.6rem;
+            list-style: none;
+            counter-reset: fstep;
+        }
+        .fsteps li {
+            display: grid;
+            grid-template-columns: 1.4rem 1fr;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-2);
+            counter-increment: fstep;
+        }
+        .fsteps li::before {
+            content: counter(fstep);
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-variant-numeric: lining-nums;
+            line-height: 1.25;
+            color: var(--accent);
+        }
         .fcard__terms {
             display: inline-flex;
             align-items: center;
@@ -810,6 +836,7 @@
             .hero__lead { margin-bottom: 2rem; font-size: 1.4rem; }
             .hero__actions { justify-content: center; }
             .hero__actions .btn { width: 100%; }
+            .hero__hint { text-align: center; }
 
             .about__photo { max-width: none; }
             .about__photo img { aspect-ratio: 4 / 3.4; object-position: 50% 22%; }
@@ -883,6 +910,7 @@
                         <a class="btn" href="https://t.me/trubchik" target="_blank" rel="noopener">Написать в&nbsp;Telegram <span class="btn__arrow" aria-hidden="true">→</span></a>
                         <a class="text-link hero__more" href="#session">Формат и&nbsp;стоимость ↓</a>
                     </div>
+                    <p class="hero__hint">Сначала&nbsp;— бесплатное знакомство, 15&nbsp;минут</p>
                 </div>
             </div>
         </section>
@@ -895,7 +923,7 @@
                     <li><span>Прежний путь больше не&nbsp;подходит, а&nbsp;новый ещё не&nbsp;ясен.</span></li>
                     <li><span>Впереди важное решение&nbsp;— в&nbsp;жизни, карьере или бизнесе.</span></li>
                     <li><span>Многое достигнуто, но&nbsp;ушли вдохновение и&nbsp;понимание, куда дальше.</span></li>
-                    <li><span>Тянет создать своё, но&nbsp;мешают сомнения и&nbsp;внутренние противоречия.</span></li>
+                    <li><span>Есть идея&nbsp;— хочется обдумать, какой она может стать.</span></li>
                     <li><span>Хочется, чтобы решения совпадали с&nbsp;тем, что <span class="nw">по-настоящему</span> важно.</span></li>
                 </ul>
             </div>
@@ -907,7 +935,7 @@
                 <h2 class="label" id="approach-title">Как я&nbsp;работаю</h2>
                 <p class="triad"><span>Глубокое внимание.</span><span>Точные вопросы.</span><span><em>Новый взгляд.</em></span></p>
                 <div class="approach__foot">
-                    <p class="approach__text">В&nbsp;работе я&nbsp;опираюсь на&nbsp;психологические подходы, предпринимательский опыт и&nbsp;практику осознанного присутствия. Без оценок и&nbsp;давления. <b>Решения&nbsp;— твои, а&nbsp;не&nbsp;мои.</b></p>
+                    <p class="approach__text">В&nbsp;работе я&nbsp;опираюсь на&nbsp;психологические подходы, предпринимательский опыт и&nbsp;практику осознанного присутствия. Моя задача&nbsp;— помочь тебе понять, какие у&nbsp;тебя есть варианты и&nbsp;что для&nbsp;тебя важно при&nbsp;выборе. Без оценок и&nbsp;давления. <b class="nw">Решения&nbsp;— твои, а&nbsp;не&nbsp;мои.</b></p>
                 </div>
             </div>
         </section>
@@ -1002,9 +1030,13 @@
                             <strong class="fcard__price">390&nbsp;€</strong>
                         </div>
                         <p class="fcard__text">Иногда одной встречи достаточно, чтобы увидеть главное и&nbsp;сделать следующий шаг.</p>
+                        <ol class="fsteps" aria-label="Как начать">
+                            <li>Пишешь в&nbsp;Telegram, с&nbsp;чем приходишь.</li>
+                            <li>Созваниваемся на&nbsp;15&nbsp;минут, бесплатно: знакомимся и&nbsp;уточняем запрос.</li>
+                            <li>Если я&nbsp;вижу, чем могу помочь,&nbsp;— договариваемся о&nbsp;сессии. Если нет&nbsp;— говорю об&nbsp;этом прямо.</li>
+                        </ol>
                         <div class="fcard__cta">
                             <a class="btn" href="https://t.me/trubchik" target="_blank" rel="noopener">Записаться на&nbsp;знакомство <span class="btn__arrow" aria-hidden="true">→</span></a>
-                            <p class="fcard__hint">Бесплатно, 15&nbsp;минут · в&nbsp;Telegram</p>
                         </div>
                     </article>
 
